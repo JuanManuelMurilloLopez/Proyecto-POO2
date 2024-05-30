@@ -1,36 +1,35 @@
 #include<iostream>
-#include<sstream>
-#include<fstream>
-#include<vector>
-#include<string>
-#include<cstdlib>
-
-#include "Servicio.h"
+#include<chrono>
 #include "Vehiculo.h"
+#include"Servicio.h"
 
 int main(){
+    auto fecha = std::chrono::system_clock::now();
     unsigned int opcion = 1;
-    while(opcion != 0){
-        std::cout<<"MENU\n";
-        std::cout<<"1. Cargar CSV\n";
-        std::cout<<"2. Nuevo CSV\n";
-        std::cout<<"\nIngresa la opcion: \n";
+    Servicio servicio(fecha);
+    servicio.mostrarFecha();
+    while (opcion != 0)
+    {
+        std::cout<<"\nMENU\n";
+        std::cout<<"1. Añadir Vehiculo\n";
+        std::cout<<"2. Consultar datos de Vehiculo\n";
+        std::cout<<"3. Información\n";
+        std::cout<<"4. Cargar ejemplos predeterminados\n";
+        std::cout<<"Ingresa la opción: \n";
         std::cin>>opcion;
-        if(opcion == 1){  
-            std::string rutaDocumento;
-            std::string linea;
-            std::ifstream documento("pruebas.txt");
-            std::getline(documento, linea);
-            std::cout<<linea<<"\n";
-        }
-        else if(opcion == 2){
-            
-        }
-        else if (opcion > 2)
-        {
-            std::cout<<"Entrada Incorrecta\n";
-        }
-        
+        if(opcion == 1){
+            unsigned int tipo = 0;
+            std::cout<<"1. Auto Gasolina\n";
+            std::cout<<"2. Auto Eléctrico\n";
+            std::cout<<"3. Van\n";
+            std::cout<<"4. Moto\n";
+            if(tipo == 1){
+
+                //servicio.agregarVehiculo();
+                //Después de pedir todos los atributos, crear el objeto dentro de la clase servicio.
+                
+            };
+        };
     }
     return 0;
 };

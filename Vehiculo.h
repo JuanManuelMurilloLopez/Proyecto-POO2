@@ -3,6 +3,22 @@
 #ifndef VEHICULO_H
 #define VEHICULO_H
 
+const int LIMITE_VIDA_LLANTAS = 0.5;
+const int COSTO_LLANTAS = 4500;
+const int COSTO_SERVICIO_TRANSMISION_MANUAL = 300;
+const int COSTO_SERVICIO_TRANSMISION_AUTOMATICA = 350;
+const int COSTO_SERVICIO_FRENOS_TAMBOR = 150;
+const int COSTO_SERVICIO_FRENOS_DISCO = 200;
+const int MULTIPLICADOR_NUMERO_PUERTAS = 35;
+const int MULTIPLICADOR_CAPACIDAD_BATERIA = 5;
+const int MULTIPLICADOR_CILINDROS = 500;
+//Falta darles valores a las constantes
+const int COSTO_ACEITE_MINERAL = 1;
+const int COSTO_ACEITE_SEMISINTETICO = 1;
+const int COSTO_ACEITE_SINTETICO = 1;
+const int COSTO_SERVICIO_DIESEL = 1;
+const int COSTO_SERVICIO_GASOLINA = 1;
+
 class Vehiculo {
     protected:
     int ID;
@@ -56,14 +72,14 @@ class Vehiculo {
     std::string getTipoTransmision(){return tipoTransmision;};
     std::string getTipoFrenos(){return tipoFrenos;};
 
-    virtual float costoServicio();
-    virtual float duracionServicio();
+    virtual float costoServicio(){return 0;};
+    virtual float duracionServicio(){return 0;};
 };
 
 class Auto : public Vehiculo {
     protected:
     int numeroPuertas;
-    //Sedán, Hatckback, Coupe
+    //Hatckback, Sedán, Coupe
     std::string carroceria;
 
     public:
@@ -89,13 +105,46 @@ class AutoElectrico : public Auto {
     AutoElectrico() : Auto(){
         this-> capacidadBateria = 0.0;
     };
-    AutoElectrico(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string TipoTransmision, std::string tipoFrenos, int numeroPuertas, std::string carroceria, float capacidadBateria) : Auto(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos, numeroPuertas, carroceria){
+    AutoElectrico(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string tipoTransmision, std::string tipoFrenos, int numeroPuertas, std::string carroceria, float capacidadBateria) : Auto(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos, numeroPuertas, carroceria){
         this-> capacidadBateria = capacidadBateria;
     };
     void setCapacidadBateria(float cb){this-> capacidadBateria = cb;};
     float getCapacidadBateria(){return capacidadBateria;};
-    virtual float costoServicio() override;
-    virtual float duracionServicio() override;
+    virtual float costoServicio() override{
+        float servicio = (anio - 1980)*10 + (kilometraje/10000);
+        if (estadoLlantas <= LIMITE_VIDA_LLANTAS && garantia){
+            servicio += COSTO_LLANTAS/2;
+        }
+        else if (estadoLlantas <= LIMITE_VIDA_LLANTAS)
+        {
+            servicio += COSTO_LLANTAS;
+        }
+        if(tipoTransmision == "Manual"){
+            servicio += COSTO_SERVICIO_TRANSMISION_MANUAL;
+        }
+        if(tipoTransmision == "Automatica"){
+            servicio += COSTO_SERVICIO_TRANSMISION_AUTOMATICA;
+        }
+        if(tipoFrenos == "Disco"){
+            servicio += COSTO_SERVICIO_FRENOS_DISCO;
+        }
+        if(tipoFrenos == "Tambor"){
+            servicio += COSTO_SERVICIO_FRENOS_TAMBOR;
+        }
+        servicio += numeroPuertas*MULTIPLICADOR_NUMERO_PUERTAS;
+
+        if(garantia){
+            servicio += capacidadBateria*MULTIPLICADOR_CAPACIDAD_BATERIA/2;
+        }
+        else{
+            servicio += capacidadBateria*MULTIPLICADOR_CAPACIDAD_BATERIA;
+        }
+
+        return servicio;
+    };
+    virtual float duracionServicio() override{
+        return tiempoAnteriorServicio/2 + capacidadBateria*0.1;
+    };
 };
 
 class AutoGasolina : public Auto {
@@ -103,7 +152,7 @@ class AutoGasolina : public Auto {
     //Litros
     float cilindraje;
     int numeroCilindros;
-    //Mineral, Semi-Sintético, Sintético
+    //Mineral, Semi-Sintetico, Sintetico
     std::string tipoAceite;
     public:
     AutoGasolina() : Auto(){
@@ -111,7 +160,7 @@ class AutoGasolina : public Auto {
         this-> numeroCilindros = 0;
         this-> tipoAceite = "NA";
     };
-    AutoGasolina(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string TipoTransmision, std::string tipoFrenos, int numeroPuertas, std::string carroceria, float cilindraje, int numeroCilindros, std::string tipoAceite) : Auto(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos, numeroPuertas, carroceria){
+    AutoGasolina(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string tipoTransmision, std::string tipoFrenos, int numeroPuertas, std::string carroceria, float cilindraje, int numeroCilindros, std::string tipoAceite) : Auto(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos, numeroPuertas, carroceria){
         this-> cilindraje = cilindraje;
         this-> numeroCilindros = numeroCilindros;
         this-> tipoAceite = tipoAceite;
@@ -122,8 +171,44 @@ class AutoGasolina : public Auto {
     float getCilindraje(){return cilindraje;};
     int getNumerocilindros(){return numeroCilindros;};
     std::string getTipoAceite(){return tipoAceite;};
-    virtual float costoServicio() override;
-    virtual float duracionServicio() override;
+    virtual float costoServicio() override{
+        float servicio = (anio - 1980)*10 + (kilometraje/10000);
+        if (estadoLlantas <= LIMITE_VIDA_LLANTAS && garantia){
+            servicio += COSTO_LLANTAS/2;
+        }
+        else if (estadoLlantas <= LIMITE_VIDA_LLANTAS)
+        {
+            servicio += COSTO_LLANTAS;
+        }
+        if(tipoTransmision == "Manual"){
+            servicio += COSTO_SERVICIO_TRANSMISION_MANUAL;
+        }
+        if(tipoTransmision == "Automatica"){
+            servicio += COSTO_SERVICIO_TRANSMISION_AUTOMATICA;
+        }
+        if(tipoFrenos == "Disco"){
+            servicio += COSTO_SERVICIO_FRENOS_DISCO;
+        }
+        if(tipoFrenos == "Tambor"){
+            servicio += COSTO_SERVICIO_FRENOS_TAMBOR;
+        }
+        servicio += numeroPuertas*MULTIPLICADOR_NUMERO_PUERTAS;
+
+        servicio += cilindraje/numeroCilindros*MULTIPLICADOR_CILINDROS;
+        if(tipoAceite == "Mineral"){
+            servicio += COSTO_ACEITE_MINERAL;
+        }
+        if(tipoAceite == "Semi-Sintetico"){
+            servicio += COSTO_ACEITE_SEMISINTETICO;
+        }
+        if(tipoAceite == "Sintetico"){
+            servicio += COSTO_ACEITE_SINTETICO;
+        }
+        return servicio;
+    };
+    virtual float duracionServicio() override{
+        return tiempoAnteriorServicio/2 + numeroCilindros*0.1;
+    };
 };
 
 class Van : public Vehiculo {
@@ -144,31 +229,79 @@ class Van : public Vehiculo {
     void setTipoCombustible(std::string tc){this-> tipoCombustible = tc;};
     int getNumeroAsientos(){return numeroAsientos;};
     std::string getTipoCombustible(){return tipoCombustible;};
-    virtual float costoServicio() override;
-    virtual float duracionServicio() override;
+    virtual float costoServicio() override{
+        float servicio = (anio - 1980)*10 + (kilometraje/10000);
+        if (estadoLlantas <= LIMITE_VIDA_LLANTAS && garantia){
+            servicio += COSTO_LLANTAS/2;
+        }
+        else if (estadoLlantas <= LIMITE_VIDA_LLANTAS)
+        {
+            servicio += COSTO_LLANTAS;
+        }
+        if(tipoTransmision == "Manual"){
+            servicio += COSTO_SERVICIO_TRANSMISION_MANUAL;
+        }
+        if(tipoTransmision == "Automatica"){
+            servicio += COSTO_SERVICIO_TRANSMISION_AUTOMATICA;
+        }
+        if(tipoFrenos == "Disco"){
+            servicio += COSTO_SERVICIO_FRENOS_DISCO;
+        }
+        if(tipoFrenos == "Tambor"){
+            servicio += COSTO_SERVICIO_FRENOS_TAMBOR;
+        }
+        if(tipoCombustible == "Diesel"){
+            servicio += COSTO_SERVICIO_DIESEL;
+        }
+        if(tipoCombustible == "Gasolina"){
+            servicio += COSTO_SERVICIO_GASOLINA;
+        }
+        return servicio;
+    };
+    virtual float duracionServicio() override{
+        return tiempoAnteriorServicio/2 + numeroAsientos*0.1;
+    };
 };
 
 class Moto : public Vehiculo {
     private:
     //cc
     int cilindrada;
-    //Scooter, Turismo, Deportiva
-    std::string tipo;
     public:
     Moto() : Vehiculo(){
         this-> cilindrada = 0;
-        this-> tipo = "NA";
     };
-    Moto(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string tipoTransmision, std::string tipoFrenos, int cilindrada, std::string tipo) : Vehiculo(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos){
+    Moto(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string tipoTransmision, std::string tipoFrenos, int cilindrada) : Vehiculo(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos){
         this-> cilindrada = cilindrada;
-        this-> tipo = tipo;
     };
     void setCilindrada(int cil){this-> cilindrada = cil;};
-    void setTipo(std::string tip){this-> tipo = tip;};
     int getCilindrada(){return cilindrada;};
-    std::string getTipo(){return tipo;};
-    virtual float costoServicio() override;
-    virtual float duracionServicio() override;
+    virtual float costoServicio() override{
+                float servicio = (anio - 1980)*10 + (kilometraje/10000);
+        if (estadoLlantas <= LIMITE_VIDA_LLANTAS && garantia){
+            servicio += COSTO_LLANTAS/2;
+        }
+        else if (estadoLlantas <= LIMITE_VIDA_LLANTAS)
+        {
+            servicio += COSTO_LLANTAS;
+        }
+        if(tipoTransmision == "Manual"){
+            servicio += COSTO_SERVICIO_TRANSMISION_MANUAL;
+        }
+        if(tipoTransmision == "Automatica"){
+            servicio += COSTO_SERVICIO_TRANSMISION_AUTOMATICA;
+        }
+        if(tipoFrenos == "Disco"){
+            servicio += COSTO_SERVICIO_FRENOS_DISCO;
+        }
+        if(tipoFrenos == "Tambor"){
+            servicio += COSTO_SERVICIO_FRENOS_TAMBOR;
+        }
+        return servicio;
+    };
+    virtual float duracionServicio() override{
+        return tiempoAnteriorServicio/2 + cilindrada*0.002;
+    };
 };
 
 #endif

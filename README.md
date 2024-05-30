@@ -6,8 +6,8 @@ El proyecto emula un sistema de gestión de servicios automotrices para diferent
 
 ## Funcionalidad: 
 
-- Carga datos de Vehículos desde un archivo CSV
-- Crea un nuevo archivo CSV para guardar un nuevo registro de Vehículos
+- Crea nuevos vehículos de diferentes tipos
+- Agrega los vehícuos a una colección 
 - Consulta, modifica, elimina y agrega Vehículos
 - Calcula costo y duración del servicio para cada vehículo y del compendio.
 
@@ -15,8 +15,8 @@ El proyecto emula un sistema de gestión de servicios automotrices para diferent
 ## Consideraciones
 
 Para que el código funcione correctamente:
-- El archivo CSV debe tener el esquema correcto, con datos completos y del tipo de dato indicado.
-- El número de vehículos por periodo de tiempo no debe de exceder los 1,000 para evitar un desbordamiento en el arreglo de Vehículos
+- Los datos de los vehículos deben de ser ingresados en el orden correcto y con el tipo de dato indicado
+- El número de vehículos por periodo de tiempo no debe de exceder los 100 para evitar un desbordamiento en el arreglo de Vehículos
 
 ### Autor: Juan Manuel Murillo López 
 

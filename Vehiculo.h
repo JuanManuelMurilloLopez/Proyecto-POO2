@@ -12,12 +12,11 @@ const int COSTO_SERVICIO_FRENOS_DISCO = 200;
 const int MULTIPLICADOR_NUMERO_PUERTAS = 35;
 const int MULTIPLICADOR_CAPACIDAD_BATERIA = 5;
 const int MULTIPLICADOR_CILINDROS = 500;
-//Falta darles valores a las constantes
-const int COSTO_ACEITE_MINERAL = 1;
-const int COSTO_ACEITE_SEMISINTETICO = 1;
-const int COSTO_ACEITE_SINTETICO = 1;
-const int COSTO_SERVICIO_DIESEL = 1;
-const int COSTO_SERVICIO_GASOLINA = 1;
+const int COSTO_ACEITE_MINERAL = 100;
+const int COSTO_ACEITE_SEMISINTETICO = 150;
+const int COSTO_ACEITE_SINTETICO = 125;
+const int COSTO_SERVICIO_DIESEL = 150;
+const int COSTO_SERVICIO_GASOLINA = 100;
 
 class Vehiculo {
     protected:
@@ -71,9 +70,23 @@ class Vehiculo {
     bool tieneGarantia(){return garantia;};
     std::string getTipoTransmision(){return tipoTransmision;};
     std::string getTipoFrenos(){return tipoFrenos;};
+    void aux_Datos(){
+        std::cout<<"\nID: "<<ID;
+        std::cout<<"\nAño: "<<anio;
+        std::cout<<"\nKilometrake: "<<kilometraje;
+        std::cout<<"\nTiempo Anterior Servicio: "<<tiempoAnteriorServicio;
+        std::cout<<"\nEstado Llantas: "<<estadoLlantas;
+        std::cout<<"\nGarantia: "<<garantia;
+        std::cout<<"\nTipo Transmision: "<<tipoTransmision;
+        std::cout<<"\nTipo Frenos: "<<tipoFrenos;
+    }
 
-    virtual float costoServicio(){return 0;};
-    virtual float duracionServicio(){return 0;};
+    virtual float costoServicio() = 0;
+    virtual float duracionServicio() = 0;
+    virtual void mostrarDatos() = 0;
+
+    //Destructor virtual
+    virtual ~Vehiculo() = 0;
 };
 
 class Auto : public Vehiculo {
@@ -95,6 +108,12 @@ class Auto : public Vehiculo {
     void setCarroceria(std::string cr){this-> carroceria = cr;};
     int getNumeroPuertas(){return numeroPuertas;};
     std::string getCarroceria(){return carroceria;};
+    virtual float costoServicio() = 0;
+    virtual float duracionServicio() = 0;
+    virtual void mostrarDatos() = 0;
+
+    //Destructor virtual
+    virtual ~Auto() = 0;
 };
 
 class AutoElectrico : public Auto {
@@ -108,9 +127,11 @@ class AutoElectrico : public Auto {
     AutoElectrico(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string tipoTransmision, std::string tipoFrenos, int numeroPuertas, std::string carroceria, float capacidadBateria) : Auto(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos, numeroPuertas, carroceria){
         this-> capacidadBateria = capacidadBateria;
     };
+    ~AutoElectrico(){};
+
     void setCapacidadBateria(float cb){this-> capacidadBateria = cb;};
     float getCapacidadBateria(){return capacidadBateria;};
-    virtual float costoServicio() override{
+    float costoServicio() override{
         float servicio = (anio - 1980)*10 + (kilometraje/10000);
         if (estadoLlantas <= LIMITE_VIDA_LLANTAS && garantia){
             servicio += COSTO_LLANTAS/2;
@@ -142,9 +163,15 @@ class AutoElectrico : public Auto {
 
         return servicio;
     };
-    virtual float duracionServicio() override{
+    float duracionServicio() override{
         return tiempoAnteriorServicio/2 + capacidadBateria*0.1;
     };
+    void mostrarDatos() override{
+        aux_Datos();
+        std::cout<<"\nNumero Puertas: "<<numeroPuertas;
+        std::cout<<"\nTipo Carroceria: "<<carroceria;
+        std::cout<<"\nCapacidad Bateria: "<<capacidadBateria;
+    }
 };
 
 class AutoGasolina : public Auto {
@@ -165,13 +192,15 @@ class AutoGasolina : public Auto {
         this-> numeroCilindros = numeroCilindros;
         this-> tipoAceite = tipoAceite;
     };
+    ~AutoGasolina(){};
+
     void setCilindraje(float cil){this-> cilindraje = cil;};
     void setNumeroCilindros(int numcil){this-> numeroCilindros = numcil;};
     void setTipoAceite(std::string ta){this-> tipoAceite = ta;};
     float getCilindraje(){return cilindraje;};
     int getNumerocilindros(){return numeroCilindros;};
     std::string getTipoAceite(){return tipoAceite;};
-    virtual float costoServicio() override{
+    float costoServicio() override{
         float servicio = (anio - 1980)*10 + (kilometraje/10000);
         if (estadoLlantas <= LIMITE_VIDA_LLANTAS && garantia){
             servicio += COSTO_LLANTAS/2;
@@ -206,8 +235,16 @@ class AutoGasolina : public Auto {
         }
         return servicio;
     };
-    virtual float duracionServicio() override{
+    float duracionServicio() override{
         return tiempoAnteriorServicio/2 + numeroCilindros*0.1;
+    };
+    void mostrarDatos() override{
+        aux_Datos();
+        std::cout<<"\nNumero de puertas: "<<numeroPuertas;
+        std::cout<<"\nCarroceria: "<<carroceria;
+        std::cout<<"\nCilindraje: "<<cilindraje;
+        std::cout<<"\nNumero cilindros: "<<numeroCilindros;
+        std::cout<<"\nTipo de aceite: "<<tipoAceite;
     };
 };
 
@@ -225,11 +262,13 @@ class Van : public Vehiculo {
         this-> numeroAsientos = numeroAsientos;
         this-> tipoCombustible = tipoCombustible;
     };
+    ~Van(){};
+
     void setNumeroAsientos(int numas){this-> numeroAsientos = numas;};
     void setTipoCombustible(std::string tc){this-> tipoCombustible = tc;};
     int getNumeroAsientos(){return numeroAsientos;};
     std::string getTipoCombustible(){return tipoCombustible;};
-    virtual float costoServicio() override{
+    float costoServicio() override{
         float servicio = (anio - 1980)*10 + (kilometraje/10000);
         if (estadoLlantas <= LIMITE_VIDA_LLANTAS && garantia){
             servicio += COSTO_LLANTAS/2;
@@ -258,8 +297,13 @@ class Van : public Vehiculo {
         }
         return servicio;
     };
-    virtual float duracionServicio() override{
+    float duracionServicio() override{
         return tiempoAnteriorServicio/2 + numeroAsientos*0.1;
+    };
+    void mostrarDatos() override{
+        aux_Datos();
+        std::cout<<"\nNumero asientos: "<<numeroAsientos;
+        std::cout<<"\nTipo combustible: "<<tipoCombustible;
     };
 };
 
@@ -274,9 +318,11 @@ class Moto : public Vehiculo {
     Moto(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string tipoTransmision, std::string tipoFrenos, int cilindrada) : Vehiculo(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos){
         this-> cilindrada = cilindrada;
     };
+    ~Moto(){};
+
     void setCilindrada(int cil){this-> cilindrada = cil;};
     int getCilindrada(){return cilindrada;};
-    virtual float costoServicio() override{
+    float costoServicio() override{
                 float servicio = (anio - 1980)*10 + (kilometraje/10000);
         if (estadoLlantas <= LIMITE_VIDA_LLANTAS && garantia){
             servicio += COSTO_LLANTAS/2;
@@ -299,8 +345,12 @@ class Moto : public Vehiculo {
         }
         return servicio;
     };
-    virtual float duracionServicio() override{
+    float duracionServicio() override{
         return tiempoAnteriorServicio/2 + cilindrada*0.002;
+    };
+    void mostrarDatos() override{
+        aux_Datos();
+        std::cout<<"\nCilindrada"<<cilindrada;
     };
 };
 

@@ -1,3 +1,17 @@
+/**
+ * 
+ * Proyecto Gestor de Servicio Automotriz
+ * Juan Manuel Murillo López
+ * A01712218
+ * 
+ * Esta clase define el objeto de tipo Servicio
+ * que contiene las operaciones para crear vehículos,
+ * mostrar los datos de sus vehículos, mostrar su fecha,
+ * actualizar su precio y duración e imprimir sus datos.
+ * Esta clase se utiliza en el main y es parte del
+ * proyecto de Gestor Automotriz
+ */
+
 #include<iostream>
 #include<chrono>
 
@@ -86,7 +100,7 @@ class Servicio {
         indice++;
     };
     void mostrarVehiculo_byID(int ID){
-        for(unsigned int i = 0; i <= indice;i++){
+        for(unsigned int i = 0; i < indice;i++){
             if(vehiculos[i]->getID() == ID){
                 vehiculos[i]->mostrarDatos();
             }
@@ -96,44 +110,29 @@ class Servicio {
         std::time_t fech = std::chrono::system_clock::to_time_t(this -> fecha);
         std::cout<<"Fecha Servicio: "<<std::ctime(& fech);
     };
-    float getPrecio(){
+    void updatePrecio(){
         float precioTotal = 0;
-        for(unsigned int i = 0; i <= indice; i++){
+        for(unsigned int i = 0; i < indice; i++){
             precioTotal += vehiculos[i]->costoServicio();
         }
-        return precioTotal;
+        this -> precio = precioTotal;
     };
-    float getDuracion(){
+    void updateDuracion(){
         float duracionTotal = 0;
-        for(unsigned int i = 0; i <= indice; i++){
-            duracionTotal += vehiculos[i]->costoServicio();
+        for(unsigned int i = 0; i < indice; i++){
+            duracionTotal += vehiculos[i]->duracionServicio();
         }
-        return duracionTotal;
+        this ->  duracion = duracionTotal;
     };
     void imprimirDatos(){
-        mostrarFecha();
+        updateDuracion();
+        updatePrecio();
         std::cout<<"Numero de Vehiculos: "<<indice;
+        std::cout<<"\n";
         mostrarFecha();
         std::cout<<"Precio: "<<precio;
-        std::cout<<"Duración: "<<duracion;
+        std::cout<<"\nDuracion: "<<duracion;
     };
-    //Revisar y probar método
-    void eliminarVehiculo_byID(int ID){
-        for(unsigned int i = 0; i <= indice; i++){
-            if(vehiculos[i]->getID() == ID){
-                delete vehiculos[i];
-                //Recorrer los datos para no dejar espacios vacíos en el arreglo
-                vehiculos[i] = vehiculos[indice];
-                delete vehiculos[indice];
-                indice--;
-            }
-        }
-    }
-    void eliminarVehiculos(){
-        for(unsigned int i = 0; i <= indice; i++){
-            delete vehiculos[i];
-        }
-    }
 };
 
 #endif

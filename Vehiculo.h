@@ -28,7 +28,7 @@ class Vehiculo {
     //Porcentaje
     float estadoLlantas;
     bool garantia;
-    //Manual, Automática
+    //Manual, Automatica
     std::string tipoTransmision;
     //Disco, Tambor
     std::string tipoFrenos;
@@ -72,27 +72,26 @@ class Vehiculo {
     std::string getTipoFrenos(){return tipoFrenos;};
     void aux_Datos(){
         std::cout<<"\nID: "<<ID;
-        std::cout<<"\nAño: "<<anio;
-        std::cout<<"\nKilometrake: "<<kilometraje;
+        std::cout<<"\nAnio: "<<anio;
+        std::cout<<"\nKilometraje: "<<kilometraje;
         std::cout<<"\nTiempo Anterior Servicio: "<<tiempoAnteriorServicio;
         std::cout<<"\nEstado Llantas: "<<estadoLlantas;
         std::cout<<"\nGarantia: "<<garantia;
         std::cout<<"\nTipo Transmision: "<<tipoTransmision;
         std::cout<<"\nTipo Frenos: "<<tipoFrenos;
+        std::cout <<"\nCosto Servicio: "<<costoServicio();
+        std::cout <<"\nDuracion Servicio: "<<duracionServicio();
     }
 
     virtual float costoServicio() = 0;
     virtual float duracionServicio() = 0;
     virtual void mostrarDatos() = 0;
-
-    //Destructor virtual
-    virtual ~Vehiculo() = 0;
 };
 
 class Auto : public Vehiculo {
     protected:
     int numeroPuertas;
-    //Hatckback, Sedán, Coupe
+    //Hatckback, Sedan, Coupe
     std::string carroceria;
 
     public:
@@ -111,9 +110,6 @@ class Auto : public Vehiculo {
     virtual float costoServicio() = 0;
     virtual float duracionServicio() = 0;
     virtual void mostrarDatos() = 0;
-
-    //Destructor virtual
-    virtual ~Auto() = 0;
 };
 
 class AutoElectrico : public Auto {
@@ -127,8 +123,6 @@ class AutoElectrico : public Auto {
     AutoElectrico(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string tipoTransmision, std::string tipoFrenos, int numeroPuertas, std::string carroceria, float capacidadBateria) : Auto(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos, numeroPuertas, carroceria){
         this-> capacidadBateria = capacidadBateria;
     };
-    ~AutoElectrico(){};
-
     void setCapacidadBateria(float cb){this-> capacidadBateria = cb;};
     float getCapacidadBateria(){return capacidadBateria;};
     float costoServicio() override{
@@ -192,7 +186,6 @@ class AutoGasolina : public Auto {
         this-> numeroCilindros = numeroCilindros;
         this-> tipoAceite = tipoAceite;
     };
-    ~AutoGasolina(){};
 
     void setCilindraje(float cil){this-> cilindraje = cil;};
     void setNumeroCilindros(int numcil){this-> numeroCilindros = numcil;};
@@ -262,7 +255,6 @@ class Van : public Vehiculo {
         this-> numeroAsientos = numeroAsientos;
         this-> tipoCombustible = tipoCombustible;
     };
-    ~Van(){};
 
     void setNumeroAsientos(int numas){this-> numeroAsientos = numas;};
     void setTipoCombustible(std::string tc){this-> tipoCombustible = tc;};
@@ -318,7 +310,6 @@ class Moto : public Vehiculo {
     Moto(int ID, int anio, int kilometraje, float tiempoAnteriorServicio, float estadoLlantas, bool garantia, std::string tipoTransmision, std::string tipoFrenos, int cilindrada) : Vehiculo(ID, anio, kilometraje, tiempoAnteriorServicio, estadoLlantas, garantia, tipoTransmision, tipoFrenos){
         this-> cilindrada = cilindrada;
     };
-    ~Moto(){};
 
     void setCilindrada(int cil){this-> cilindrada = cil;};
     int getCilindrada(){return cilindrada;};

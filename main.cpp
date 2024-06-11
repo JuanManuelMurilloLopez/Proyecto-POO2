@@ -14,16 +14,16 @@ int main(){
     do{
         std::cout<<"\nMENU\n";
         //Opciones de funcionalidades para el usuario
-        std::cout<<"1. Añadir Vehiculo\n";
+        std::cout<<"1. Aniadir Vehiculo\n";
         std::cout<<"2. Consultar datos de Vehiculo\n";
-        std::cout<<"3. Información del servicio\n";
+        std::cout<<"3. Informacion del servicio\n";
         std::cout<<"4. Cargar ejemplos predeterminados\n";
         std::cout<<"0. SALIR\n";
-        std::cout<<"Ingresa la opción: \n";
+        std::cout<<"Ingresa la opcion: \n";
         std::cin>>opcion; 
         if(opcion == 1){
             unsigned int tipo;
-            std::cout<<"1. Auto Eléctrico\n";
+            std::cout<<"1. Auto Electrico\n";
             std::cout<<"2. Auto Gasolina\n";
             std::cout<<"3. Van\n";
             std::cout<<"4. Moto\n";
@@ -39,7 +39,7 @@ int main(){
                 std::cout<<"Ingrese el kilometraje: ";
                 std::cin>>kilometraje;
                 int anio;
-                std::cout<<"Ingrese el año: ";
+                std::cout<<"Ingrese el anio: ";
                 std::cin>>anio;
                 float tiempoAnteriorServicio;
                 std::cout<<"Ingrese el tiempo desde el anterior servicio (meses): ";
@@ -52,7 +52,7 @@ int main(){
                 std::cin>>garantia;
                 std::string tipoTransmision;
                 int opTransmision;
-                std::cout<<"Ingrese la opción de tipo de transmision";
+                std::cout<<"Ingrese la opcion de tipo de transmision";
                 std::cout<<"1. Manual";
                 std::cout<<"2. Automática";
                 std::cin>>opTransmision;
@@ -64,7 +64,7 @@ int main(){
                 }
                 std::string tipoFrenos;
                 int opFrenos;
-                std::cout<<"Ingrese la opción del tipo de Frenos";
+                std::cout<<"Ingrese la opcion del tipo de Frenos";
                 std::cout<<"1. Disco";
                 std::cout<<"2. Tambor";
                 std::cin>>opFrenos;
@@ -81,17 +81,17 @@ int main(){
                 std::cin>>numeroPuertas;
                 std::string carroceria;
                 int opCarroceria;
-                std::cout<<"Ingrese la opción del tipo de carrocería: ";
+                std::cout<<"Ingrese la opcion del tipo de carroceria: ";
                 //Hatckback, Sedán, Coupe
                 std::cout<<"1. Hatchback";
-                std::cout<<"2. Sedán";
+                std::cout<<"2. Sedan";
                 std::cout<<"3. Coupe";
                 std::cin>>opCarroceria;
                 if(opCarroceria == 1){
                     carroceria = "Hatchback";
                 }
                 if(opCarroceria == 2){
-                    carroceria = "Sedán";
+                    carroceria = "Sedan";
                 }
                 if(opCarroceria == 3){
                     carroceria = "Coupe";
@@ -99,7 +99,7 @@ int main(){
 
                 //Atributos específicos de la clase AutoEletrico
                 float capacidadBateria;
-                std::cout<<"Ingrese la capacidad de la batería";
+                std::cout<<"Ingrese la capacidad de la bateria";
                 std::cin>>capacidadBateria;
 
                 //Creamos el objeto con los valores recibidos
@@ -114,7 +114,7 @@ int main(){
                 std::cout<<"Ingrese el ID del Vehiculo: ";
                 std::cin>>ID;
                 int anio;
-                std::cout<<"Ingrese el año: ";
+                std::cout<<"Ingrese el anio: ";
                 std::cin>>anio;
                 int kilometraje;
                 std::cout<<"Ingrese el kilometraje: ";
@@ -130,15 +130,15 @@ int main(){
                 std::cin>>garantia;
                 std::string tipoTransmision;
                 int opTransmision;
-                std::cout<<"Ingrese la opción de tipo de transmision";
+                std::cout<<"Ingrese la opcion de tipo de transmision";
                 std::cout<<"1. Manual";
-                std::cout<<"2. Automática";
+                std::cout<<"2. Automatica";
                 std::cin>>opTransmision;
                 if(opTransmision == 1){
                     tipoTransmision = "Manual";
                 }
                 if(opTransmision == 2){
-                    tipoTransmision = "Automática";
+                    tipoTransmision = "Automatica";
                 }
                 std::string tipoFrenos;
                 int opFrenos;
@@ -159,17 +159,17 @@ int main(){
                 std::cin>>numeroPuertas;
                 std::string carroceria;
                 int opCarroceria;
-                std::cout<<"Ingrese la opción del tipo de carrocería: ";
+                std::cout<<"Ingrese la opcion del tipo de carroceria: ";
                 //Hatckback, Sedán, Coupe
                 std::cout<<"1. Hatchback";
-                std::cout<<"2. Sedán";
+                std::cout<<"2. Seden";
                 std::cout<<"3. Coupe";
                 std::cin>>opCarroceria;
                 if(opCarroceria == 1){
                     carroceria = "Hatchback";
                 }
                 if(opCarroceria == 2){
-                    carroceria = "Sedán";
+                    carroceria = "Seden";
                 }
                 if(opCarroceria == 3){
                     carroceria = "Coupe";
@@ -188,16 +188,16 @@ int main(){
                 //Mineral, Semi-Sintetico, Sintetico
                 std::cout<<"1. Mineral";
                 std::cout<<"2. Semi-Sintetico";
-                std::cout<<"3. Sintético";
+                std::cout<<"3. Sintetico";
                 std::cin>>opAceite;
                 if(opAceite == 1){
                     tipoAceite = "Mineral";
                 }
                 if(opAceite == 2){
-                    tipoAceite = "Semi-Sintético";
+                    tipoAceite = "Semi-Sintetico";
                 }
                 if(opAceite == 3){
-                    tipoAceite = "Sintético";
+                    tipoAceite = "Sintetico";
                 }
 
                 //Creamos el objeto con los valores recibidos
@@ -227,19 +227,19 @@ int main(){
                 std::cin>>garantia;
                 std::string tipoTransmision;
                 int opTransmision;
-                std::cout<<"Ingrese la opción de tipo de transmision";
+                std::cout<<"Ingrese la opcion de tipo de transmision";
                 std::cout<<"1. Manual";
-                std::cout<<"2. Automática";
+                std::cout<<"2. Automatica";
                 std::cin>>opTransmision;
                 if(opTransmision == 1){
                     tipoTransmision = "Manual";
                 }
                 if(opTransmision == 2){
-                    tipoTransmision = "Automática";
+                    tipoTransmision = "Automatica";
                 }
                 std::string tipoFrenos;
                 int opFrenos;
-                std::cout<<"Ingrese la opción del tipo de Frenos";
+                std::cout<<"Ingrese la opcion del tipo de Frenos";
                 std::cout<<"1. Disco";
                 std::cout<<"2. Tambor";
                 std::cin>>opFrenos;
@@ -252,11 +252,11 @@ int main(){
 
                 //Atributos específicos de la clase Van
                 int numeroAsientos;
-                std::cout<<"Ingrese el núumero de asientos: ";
+                std::cout<<"Ingrese el numero de asientos: ";
                 std::cin>>numeroAsientos;
                 std::string tipoCombustible;
                 int opCombustible;
-                std::cout<<"Ingrese la opción del tipo de combustible: ";
+                std::cout<<"Ingrese la opcion del tipo de combustible: ";
                 std::cout<<"1. Gasolina";
                 std::cout<<"2. Diesel";
                 std::cin>>opCombustible;
@@ -281,7 +281,7 @@ int main(){
                 std::cout<<"Ingrese el kilometraje: ";
                 std::cin>>kilometraje;
                 int anio;
-                std::cout<<"Ingrese el año: ";
+                std::cout<<"Ingrese el anio: ";
                 std::cin>>anio;
                 float tiempoAnteriorServicio;
                 std::cout<<"Ingrese el tiempo desde el anterior servicio (meses): ";
@@ -296,17 +296,17 @@ int main(){
                 int opTransmision;
                 std::cout<<"Ingrese la opción de tipo de transmision";
                 std::cout<<"1. Manual";
-                std::cout<<"2. Automática";
+                std::cout<<"2. Automatica";
                 std::cin>>opTransmision;
                 if(opTransmision == 1){
                     tipoTransmision = "Manual";
                 }
                 if(opTransmision == 2){
-                    tipoTransmision = "Automática";
+                    tipoTransmision = "Automatica";
                 }
                 std::string tipoFrenos;
                 int opFrenos;
-                std::cout<<"Ingrese la opción del tipo de Frenos";
+                std::cout<<"Ingrese la opcion del tipo de Frenos";
                 std::cout<<"1. Disco";
                 std::cout<<"2. Tambor";
                 std::cin>>opFrenos;
@@ -336,18 +336,11 @@ int main(){
             servicio.imprimirDatos();
         }
         if(opcion == 4){
-            //servicio.agregarAutoElectrico();
-            //servicio.agregarAutoGasolina();
-            //servicio.agregarMoto();
-            //servicio.agregarVan();
-            //servicio.agregarAutoElectrico();
-            //servicio.agregarAutoGasolina();
-            //servicio.agregarMoto();
-            //servicio.agregarVan();
-            //servicio.agregarAutoElectrico();
-            //servicio.agregarAutoGasolina();
-            //servicio.agregarMoto();
-            //servicio.agregarVan();
+            servicio.crearAutoElectrico(1001,2015,200000,3,0.8,1,"Automatica","Disco",4,"Hatckback",40);
+            servicio.crearAutoGasolina(1002,2005,450000,4,0.3,0,"Manual","Tambor",4,"Sedan",2.0,4,"Mineral");
+            servicio.crearMoto(1003,2020,40000,2,0.8,1,"Manual","Disco",125);
+            servicio.crearVan(1004,1990,500000,4,0.3,1,"Manual","Tambor",14,"Diesel");
+            std::cout<<"\n **Ejemplos Cargados**\n";
         }
         if(opcion > 4){
             std::cout<<"\nEntrada Incorrecta.\n";
@@ -356,4 +349,3 @@ int main(){
     while(opcion != 0);
     return 0;
 };
-

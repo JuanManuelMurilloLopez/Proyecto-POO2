@@ -1,3 +1,16 @@
+/*
+ * Proyecto Gestor main
+ * Juan Manuel Murillo López 
+ * A01712218
+ * 11/06/24
+ * Proyecto final para la materia de 
+ * Programación Orientada a Objetos 2 TC1030.304
+ * Este programa crea un gestor de servicio automotriz
+ * con diferentes tipos de vehículos el cual nos muestra
+ * datos de costo y duración del servicio además de 
+ * información de cada uno de los vehículos.
+*/
+
 #include<iostream>
 #include<chrono>
 #include "Vehiculo.h"

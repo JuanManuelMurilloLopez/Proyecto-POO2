@@ -9,7 +9,10 @@ int main(){
     unsigned int opcion;
     //Creamos el objeto de servicio
     Servicio servicio(fecha);
-
+    unsigned int numEmp;
+    std::cout<<"Ingrese la cantidad de empleados: ";
+    std::cin>>numEmp;
+    servicio.setNumeroEmpleados(numEmp);
     //Menú ciclado
     do{
         std::cout<<"\nMENU\n";
@@ -42,7 +45,8 @@ int main(){
                 std::cout<<"Ingrese el anio: ";
                 std::cin>>anio;
                 float tiempoAnteriorServicio;
-                std::cout<<"Ingrese el tiempo desde el anterior servicio (meses): ";
+                std::cout<<"Ingrese el tiempo desde el anterior";
+                std::cout<<"servicio (meses): ";
                 std::cin>>tiempoAnteriorServicio;
                 float estadoLlantas;
                 std::cout<<"Ingrese el estado de llantas (porcentaje): ";
@@ -103,7 +107,10 @@ int main(){
                 std::cin>>capacidadBateria;
 
                 //Creamos el objeto con los valores recibidos
-                servicio.crearAutoElectrico(ID,anio,kilometraje,tiempoAnteriorServicio,estadoLlantas,garantia,tipoTransmision,tipoFrenos,numeroPuertas,carroceria,capacidadBateria);
+                servicio.crearAutoElectrico(ID,anio,kilometraje,
+                tiempoAnteriorServicio,estadoLlantas,garantia,
+                tipoTransmision,tipoFrenos,numeroPuertas,
+                carroceria,capacidadBateria);
 
             } 
             if(tipo == 2){
@@ -120,7 +127,8 @@ int main(){
                 std::cout<<"Ingrese el kilometraje: ";
                 std::cin>>kilometraje;
                 float tiempoAnteriorServicio;
-                std::cout<<"Ingrese el tiempo desde el anterior servicio (meses): ";
+                std::cout<<"Ingrese el tiempo desde el anterior ";
+                std::cout<<"servicio (meses): ";
                 std::cin>>tiempoAnteriorServicio;
                 float estadoLlantas;
                 std::cout<<"Ingrese el estado de llantas (porcentaje): ";
@@ -201,7 +209,10 @@ int main(){
                 }
 
                 //Creamos el objeto con los valores recibidos
-                servicio.crearAutoGasolina(ID,anio,kilometraje,tiempoAnteriorServicio,estadoLlantas,garantia,tipoTransmision,tipoFrenos,numeroPuertas,carroceria,cilindraje,numeroCilindros,tipoAceite);
+                servicio.crearAutoGasolina(ID,anio,kilometraje,
+                tiempoAnteriorServicio,estadoLlantas,garantia,
+                tipoTransmision,tipoFrenos,numeroPuertas,carroceria
+                ,cilindraje,numeroCilindros,tipoAceite);
             }
             if(tipo == 3){
                 //Pedimos los datos de la Van al usuario
@@ -217,7 +228,8 @@ int main(){
                 std::cout<<"Ingrese el año: ";
                 std::cin>>anio;
                 float tiempoAnteriorServicio;
-                std::cout<<"Ingrese el tiempo desde el anterior servicio (meses): ";
+                std::cout<<"Ingrese el tiempo desde el anterior";
+                std::cout<<"servicio (meses): ";
                 std::cin>>tiempoAnteriorServicio;
                 float estadoLlantas;
                 std::cout<<"Ingrese el estado de llantas (porcentaje): ";
@@ -268,7 +280,9 @@ int main(){
                 }
                 
                 //Creamos el objeto con los valores recibidos
-                servicio.crearVan(ID,anio,kilometraje,tiempoAnteriorServicio,estadoLlantas,garantia,tipoTransmision,tipoFrenos,numeroAsientos,tipoCombustible);
+                servicio.crearVan(ID,anio,kilometraje,tiempoAnteriorServicio
+                ,estadoLlantas,garantia,tipoTransmision,tipoFrenos,
+                numeroAsientos,tipoCombustible);
             }
             if(tipo == 4){
                 //Pedimos los datos de la Moto al usuario
@@ -284,7 +298,8 @@ int main(){
                 std::cout<<"Ingrese el anio: ";
                 std::cin>>anio;
                 float tiempoAnteriorServicio;
-                std::cout<<"Ingrese el tiempo desde el anterior servicio (meses): ";
+                std::cout<<"Ingrese el tiempo desde el anterior";
+                std::cout<<"servicio (meses): ";
                 std::cin>>tiempoAnteriorServicio;
                 float estadoLlantas;
                 std::cout<<"Ingrese el estado de llantas (porcentaje): ";
@@ -323,7 +338,8 @@ int main(){
                 std::cin>>cilindrada;
 
                 //Creamos el objeto con los valores recibidos
-                servicio.crearMoto(ID,anio,kilometraje,tiempoAnteriorServicio,estadoLlantas,garantia,tipoTransmision,tipoFrenos,cilindrada);
+                servicio.crearMoto(ID,anio,kilometraje,tiempoAnteriorServicio,
+                estadoLlantas,garantia,tipoTransmision,tipoFrenos,cilindrada);
             }
         } 
         if(opcion == 2){
@@ -336,12 +352,15 @@ int main(){
             servicio.imprimirDatos();
         }
         if(opcion == 4){
-            servicio.crearAutoElectrico(1001,2015,200000,3,0.8,1,"Automatica","Disco",4,"Hatckback",40);
-            servicio.crearAutoGasolina(1002,2005,450000,4,0.3,0,"Manual","Tambor",4,"Sedan",2.0,4,"Mineral");
+            servicio.crearAutoElectrico(1001,2015,200000,3,0.8,1,"Automatica"
+            ,"Disco",4,"Hatckback",40);
+            servicio.crearAutoGasolina(1002,2005,450000,4,0.3,0,"Manual"
+            ,"Tambor",4,"Sedan",2.0,4,"Mineral");
             servicio.crearMoto(1003,2020,40000,2,0.8,1,"Manual","Disco",125);
-            servicio.crearVan(1004,1990,500000,4,0.3,1,"Manual","Tambor",14,"Diesel");
+            servicio.crearVan(1004,1990,500000,4,0.3,1,"Manual","Tambor",14,
+            "Diesel");
             std::cout<<"\n **Ejemplos Cargados**\n";
-        }
+            }
         if(opcion > 4){
             std::cout<<"\nEntrada Incorrecta.\n";
         }

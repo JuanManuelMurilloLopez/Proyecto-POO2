@@ -6,10 +6,10 @@ El proyecto emula un sistema de gestión de servicios automotrices para diferent
 
 ## Funcionalidad: 
 
-- Crea nuevos vehículos de diferentes tipos
-- Crea nuevos vehícuos a una colección 
+- Crea nuevos vehículos de diferentes tipos en una colección
 - Consulta, modifica y agrega Vehículos
 - Calcula costo y duración del servicio para cada vehículo y del compendio.
+- Imprime la información del Servicio
 
 
 ## Consideraciones
